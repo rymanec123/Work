@@ -26,11 +26,11 @@ var removeSpan = function(){
 var result = function(num) {
   
   if( typeof num ==='number' && num % 2==0){
-    document.getElementsByClassName('l-tasks__item-text')[0].textContent ='This is a number:'+' ' + num +' '+'even';
+    document.getElementsByClassName('l-tasks__item-text')[0].textContent ='This is a number: '+ num +'even';
   }
   else
     if(typeof num ==='number' && num % 2!==0){
-     document.getElementsByClassName('l-tasks__item-text')[0].textContent ='This is a number:'+' ' + num +' '+'odd';
+     document.getElementsByClassName('l-tasks__item-text')[0].textContent ='This is a number:'+' ' + num +'odd';
   } 
     else {
      document.getElementsByClassName('l-tasks__item-text')[0].textContent ='This is not a number';
