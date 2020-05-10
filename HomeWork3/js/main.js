@@ -1,32 +1,32 @@
-var el = document.body;
-var btn = document.getElementsByClassName('l-tasks__btn _toggle')[0];
-var btn2 = document.getElementsByClassName('l-tasks__btn _remove')[0];
-var span = document.getElementsByClassName('l-tasks__span');
+var body = document.body;
+var btnToggle = document.getElementsByClassName('l-tasks__btn _toggle')[0];
+var btnRemove = document.getElementsByClassName('l-tasks__btn _remove')[0];
+var spansArray = document.getElementsByClassName('l-tasks__span');
 var itemText = document.getElementsByClassName('l-tasks__item-text')[0];
 
 var clickHandler = function(){
-  el.classList.toggle('_color-schemie-light');
+  body.classList.toggle('_color-schemie-light');
 }
-btn.addEventListener('click',clickHandler);
+btnToggle.addEventListener('click',clickHandler);
 
 
-var removeSpan = function() {
+var removeSpanHandler = function() {
 
-  if(el.classList.contains('_color-schemie-light')) {
-  span[9].remove(); 
+  if(body.classList.contains('_color-schemie-light')) {
+  spansArray[spansArray.length-1].remove(); 
     }
   else {
-  span[0].remove();
+  spansArray[0].remove();
   }
-  btn2.removeEventListener('click',removeSpan);
+  btnRemove.removeEventListener('click',removeSpanHandler);
 }
-btn2.addEventListener('click',removeSpan);
+btnRemove.addEventListener('click',removeSpanHandler);
 
 
 (function(num) {
   var type = ' odd';
 
-  if(typeof num !== "number") {
+  if(typeof num !== 'number') {
     return itemText.textContent ='This is not a number';
   }
   else if(typeof num % 2 === 0) {
