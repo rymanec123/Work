@@ -7,8 +7,6 @@ var itemText = document.getElementsByClassName('l-tasks__item-text')[0];
 var clickHandler = function(){
   body.classList.toggle('_color-schemie-light');
 }
-btnToggle.addEventListener('click',clickHandler);
-
 
 var removeSpanHandler = function() {
 
@@ -20,8 +18,9 @@ var removeSpanHandler = function() {
   }
   btnRemove.removeEventListener('click',removeSpanHandler);
 }
-btnRemove.addEventListener('click',removeSpanHandler);
 
+btnToggle.addEventListener('click',clickHandler);
+btnRemove.addEventListener('click',removeSpanHandler);
 
 (function(num) {
   var type = ' odd';
