@@ -1,0 +1,20 @@
+body {
+    background-color: #1a507b;
+    padding: 50px 0;
+}
+.b-universe {
+    background: url(img/galaxy.jpg) ;
+    background-size: cover;
+    height: 550px;
+    width: 800px;
+    margin: auto;
+    position: relative;
+}
+.b-universe__img {
+    height: 100px;
+    width: 100px;
+    left: 100px;
+    top: 150px;
+    position: absolute;
+    transition: transform .8s ease-out;
+}
