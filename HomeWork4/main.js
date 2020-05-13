@@ -22,7 +22,6 @@ univers.addEventListener('click', function(e) {
         }
 
         earth.style.transform ='translate(' + x + 'px , ' + y + 'px)';
-        console.log(earth.style.transform);
     }
 
     if (target.tagName ==='IMG') {
@@ -31,7 +30,5 @@ univers.addEventListener('click', function(e) {
     else {
         earth.style.display = '';
     }
-    console.log(target.tagName);
-
 });
 
