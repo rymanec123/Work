@@ -1,12 +1,12 @@
 var imgEarth = document.querySelector('.b-universe__img');
 var univers = document.querySelector('.b-universe');
-var limitX = univers.offsetWidth - imgEarth.offsetWidth;
-var limitY = univers.offsetHeight - imgEarth.offsetHeight;
 
 univers.addEventListener('click', function(e) {
     var x = e.offsetX - imgEarth.offsetWidth / 2;
     var y = e.offsetY - imgEarth.offsetHeight / 2;
     var target = e.target;
+    var limitX = univers.offsetWidth - imgEarth.offsetWidth;
+    var limitY = univers.offsetHeight - imgEarth.offsetHeight;
 
     if  (imgEarth.style.display === 'none') {
         return imgEarth.style.display = '';
