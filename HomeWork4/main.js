@@ -11,21 +11,20 @@ univers.addEventListener('click', function(e) {
     }
     if (target.tagName.toLowerCase() ==='img') {
         return imgEarth.style.display = 'none';
-     }
+    }
 
     if(x < 0) {
         x = 0;
     }
-    else if(x > 700) {
-        x = 700;
+    else if(x > univers.offsetWidth - imgEarth.offsetWidth) {
+        x = univers.offsetWidth - imgEarth.offsetWidth;
     }
     if(y < 0) {
         y = 0;
     }
-    else if(y > 450) {
-        y = 450;
+    else if(y > univers.offsetHeight - imgEarth.offsetHeight) {
+        y = univers.offsetHeight - imgEarth.offsetHeight;
     }
-    console.log(x, y)
 
     imgEarth.style.transform ='translate(' + x + 'px , ' + y + 'px)';
 });
