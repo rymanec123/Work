@@ -1,10 +1,8 @@
 var body = document.body;
 var form = document.querySelector('.form');
 var but = document.querySelector('button');
-var email = document.querySelector('input');
 
 form.addEventListener('submit', function(e) {
-    e.stopImmediatePropagation();
     e.preventDefault();
 
     var emailValue = e.target.elements.email.value;
@@ -19,7 +17,7 @@ form.addEventListener('submit', function(e) {
 });
 
 but.addEventListener('click', function(e) {
-    e.stopImmediatePropagation();
+    e.stopPropagation();
 });
 
 body.addEventListener('click', function(e) {
