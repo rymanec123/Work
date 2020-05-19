@@ -7,7 +7,7 @@ var obj = {
     field5: 'test5'
   };
 var body = document.body;
-var btn = document.querySelector('button');
+var buttonColor = document.querySelector('button');
 var counter;
 
   for (var prop in obj) {
@@ -17,7 +17,7 @@ var counter;
     }             
   }
 
-  btn.addEventListener('click', function(e) {
+ buttonColor.addEventListener('click', function(e) {
     var max = colors.length-1;
     var min = 0;
 
