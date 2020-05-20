@@ -1,5 +1,5 @@
 body {
-    transition: background .7s ease;
+    transition: background-color .7s ease;
     text-align: center;
     padding: 50px 0;
   }
