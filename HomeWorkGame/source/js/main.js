@@ -1,5 +1,5 @@
 var aim = document.querySelector('.b-shooter__aim');
-var aimImg = document.querySelector('b-shooter__img-aim');
+var aimImg = document.querySelector('.b-shooter__img-aim');
 var shooter = document.querySelector('.b-shooter');
 
 shooter.addEventListener('click', function(e) {
@@ -20,17 +20,16 @@ shooter.addEventListener('click', function(e) {
     else if(y > limitY) {
         y = limitY;
     }
-    aim.style.left = x + 'px';
-    aim.style.top = y + 'px';
+    aim.style.transform ='translate(' + x + 'px , ' + y + 'px)';
 });
 
 document.addEventListener('keydown', function(e) {
     if(e.keyCode === 13) {
-        aim.style.padding ='10px';
+        aimImg.style.transform = 'scale(0.9)';
     }
 });
 document.addEventListener('keyup', function(e) {
     if(e.keyCode === 13) {
-        aim.style.padding ='';
+        aimImg.style.transform = '';
     }
-})
+});

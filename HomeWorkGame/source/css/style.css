@@ -11,6 +11,7 @@ body {
     width: 935px;
     margin: auto;
     position: relative;
+    cursor: pointer;
 }
 .b-shooter__aim {
     height: 100px;
@@ -18,9 +19,7 @@ body {
     left: 0;
     top: 0;
 	position: absolute;
-	pointer-events: none;
+    pointer-events: none;
+    transform: translate(300px, 200px);
+    transition: transform .1s linear;
 }
-/* .b-shooter__img-aim {
-	height: 90px;
-    width: 90px;
-} */
