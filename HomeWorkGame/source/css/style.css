@@ -22,4 +22,10 @@ body {
     pointer-events: none;
     transform: translate(300px, 200px);
     transition: transform .1s linear;
+   }
+.b-shooter__img-ghost {
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    pointer-events: none;
 }
