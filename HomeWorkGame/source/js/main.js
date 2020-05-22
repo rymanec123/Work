@@ -31,12 +31,12 @@ body.addEventListener('keydown', function(e) {
         aimImg.style.transform = 'scale(0.9)';
     }
 });
-document.addEventListener('keyup', function(e) {
-    var clientY = aimImg.getBoundingClientRect().y;
-    var clientX = aimImg.getBoundingClientRect().x;
+
+body.addEventListener('keyup', function(e) {
+    var aimCoords = aimImg.getBoundingClientRect();
     if(e.keyCode === 32) {
-        var aimCenterY = clientY - aim.offsetHeight / 2;
-        var aimCenterX = clientX -  aim.offsetWidth / 2;
+        var aimCenterY = aimCoords.y - aim.offsetHeight / 2;
+        var aimCenterX = aimCoords.x - aim.offsetWidth / 2;
         aimImg.style.transform = '';
 
         console.log(aimCenterX, '|', aimCenterY);
@@ -50,6 +50,7 @@ function setRandomCoords() {
     ghost.style.left = x + 'px';
     ghost.style.top = y + 'px';
 };
+
 setInterval(function() {
     if(ghost.style.display === 'none') {
         ghost.style.display = ''; 
