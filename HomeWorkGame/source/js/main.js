@@ -23,7 +23,6 @@ shooter.addEventListener('click', function(e) {
         y = limitY;
     }
     aim.style.transform ='translate(' + x + 'px , ' + y + 'px)';
-    console.log(x, '|', y);
   });
 
 body.addEventListener('keydown', function(e) {
@@ -56,4 +55,4 @@ setInterval(function() {
         ghost.style.display = ''; 
     }
     setRandomCoords();
-}, 300);
+}, 3000);
