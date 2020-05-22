@@ -32,11 +32,11 @@ body.addEventListener('keydown', function(e) {
     }
 });
 document.addEventListener('keyup', function(e) {
-    var locationY = aimImg.getBoundingClientRect().y;
-    var locationX = aimImg.getBoundingClientRect().x;
+    var clientY = aimImg.getBoundingClientRect().y;
+    var clientX = aimImg.getBoundingClientRect().x;
     if(e.keyCode === 32) {
-        var aimCenterY = locationY - aim.offsetHeight / 2;
-        var aimCenterX = locationX -  aim.offsetWidth / 2;
+        var aimCenterY = clientY - aim.offsetHeight / 2;
+        var aimCenterX = clientX -  aim.offsetWidth / 2;
         aimImg.style.transform = '';
 
         console.log(aimCenterX, '|', aimCenterY);
