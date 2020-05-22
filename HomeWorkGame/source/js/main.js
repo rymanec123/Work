@@ -45,8 +45,8 @@ document.addEventListener('keyup', function(e) {
 });
 
 function setRandomCoords() {
-    var x = Math.floor(Math.random() * shooter.offsetWidth - ghost.offsetWidth / 2);
-    var y = Math.floor(Math.random() * shooter.offsetHeight - ghost.offsetHeight / 2);
+    var x = Math.floor(Math.random() * (shooter.offsetWidth - ghost.offsetWidth));
+    var y = Math.floor(Math.random() * (shooter.offsetHeight - ghost.offsetHeight));
 
     ghost.style.left = x + 'px';
     ghost.style.top = y + 'px';
@@ -56,4 +56,4 @@ setInterval(function() {
         ghost.style.display = ''; 
     }
     setRandomCoords();
-}, 3000);
+}, 300);
