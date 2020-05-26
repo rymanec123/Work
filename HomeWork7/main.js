@@ -36,39 +36,39 @@ function printSquareRoot(func, num) {
 // аргументов вызова. Напишите проверку на количество элементов. Если в массиве их станет пять, а новый пришедший аргумент должен
 //  быть шестым, то массив очищается, и начинает наполняться заново (агрумент текущего вызова станет нулевым элементом, следующего - первым и т.д.).
 function outer() {
-    var arr = [];
-     
-     return function inner(arg) {
-       if(arr.length < 5) {
-         arr.push(arg);
-       }
-       else {
-         arr.length = 0;
-         arr.push(arg)
-       }
-       console.log(arr);
-     }
-   }
-  
-  var result = outer();
-  
-  result('1');
-  result('2');
-  result('3');
-  result('4');
-  result('5');
-  result('6');
-  result('7');
-  result('8');
+  var arr = [];
+
+  return function inner(arg) {
+    if(arr.length === 5) {
+      arr = [];
+    }
+    arr.push(arg);
+    console.log(arr);
+  }
+}
+
+var result = outer();
+
+result('1');
+result('2');
+result('3');
+result('4');
+result('5');
+result('6');
+result('7');
+result('8');
 // 5) Добавьте элемент button в html и привяжите к нему событие клик, которое будет считать количество нажатий и выводить
 //  его в текст кнопки. Количество нажатий должно сохраняться в замыкании.
+ 
+var btn = document.querySelector('button');
+  
+btn.addEventListener('click', outer());
 
-
-window.load = function() {
-  var btn = document.querySelector('button');
-  count = 0;
-   btn.addEventListener('click', function() {
-        count++;
-        btn.innerHTML = 'счёт нажатий: ' + count;
-        })
+function outer() {
+  var count = 0;
+  
+  return function inner(e) {
+    count++;
+    e.currentTarget.innerText = 'счёт нажатий: ' + count;
+  }   
 }
