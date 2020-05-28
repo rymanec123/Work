@@ -2,7 +2,11 @@ var aim = document.querySelector('.b-shooter__aim');
 var aimImg = document.querySelector('.b-shooter__img-aim');
 var ghost = document.querySelector('.b-shooter__img-ghost');
 var shooter = document.querySelector('.b-shooter');
+var fire = document.querySelector('.b-shooter__img-fire');
 var body = document.body;
+var delayToReset = 500;
+var imgOpacityDelay = delayToReset * 0.4;
+var imgOpacityDuration = delayToReset - imgOpacityDelay;
 
 shooter.addEventListener('click', function(e) {
     var x = e.offsetX - aim.offsetWidth / 2;
@@ -34,12 +38,33 @@ body.addEventListener('keydown', function(e) {
 
 body.addEventListener('keyup', function(e) {
     var aimCoords = aimImg.getBoundingClientRect();
+    var ghostLeft = ghost.getBoundingClientRect().left + 20;
+    var ghostRight = ghost.getBoundingClientRect().right - 20;
+    var ghostTop = ghost.getBoundingClientRect().top + 20;
+    var ghostBot = ghost.getBoundingClientRect().bottom - 20;
     if(e.keyCode === 32) {
-        var aimCenterY = aimCoords.y - aim.offsetHeight / 2;
-        var aimCenterX = aimCoords.x - aim.offsetWidth / 2;
+        var aimCenterY = aimCoords.y + aim.offsetHeight / 2;
+        var aimCenterX = aimCoords.x + aim.offsetWidth / 2;
         aimImg.style.transform = '';
 
         console.log(aimCenterX, '|', aimCenterY);
+    }
+    if (aimCenterX > ghostLeft && aimCenterX < ghostRight 
+        && aimCenterY > ghostTop && aimCenterY < ghostBot) {
+            fire.setAttribute('style','visibility: visible; transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;');
+            // ghost.setAttribute('style','transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;');
+            ghost.style.transitionDelay = imgOpacityDelay +'ms';
+            ghost.style.transitionDuration = imgOpacityDuration +'ms';
+            ghost.style.opacity = '0';
+            aimImg.style.display = 'none';
+            setTimeout(function() {
+                ghost.style.transitionDelay = '';
+                ghost.style.transitionDuration = '';
+                ghost.style.opacity = '';
+                ghost.style.display = 'none';
+                fire.removeAttribute('style');
+                aimImg.style.display = '';
+            }, delayToReset);
     }
 });
 
@@ -52,8 +77,10 @@ function setRandomCoords() {
 };
 
 setInterval(function() {
-    if(ghost.style.display === 'none') {
+        if(ghost.style.display === 'none') {
         ghost.style.display = ''; 
     }
-    setRandomCoords();
+        if(!ghost.style.opacity) {
+            setRandomCoords();
+    }
 }, 3000);
