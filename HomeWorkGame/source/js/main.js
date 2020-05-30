@@ -37,40 +37,37 @@ body.addEventListener('keydown', function(e) {
 });
 
 body.addEventListener('keyup', function(e) {
-    var aimCoords = aimImg.getBoundingClientRect();
-    var ghostLeft = ghost.getBoundingClientRect().left + 20;
-    var ghostRight = ghost.getBoundingClientRect().right - 20;
-    var ghostTop = ghost.getBoundingClientRect().top + 20;
-    var ghostBot = ghost.getBoundingClientRect().bottom - 20;
     if(e.keyCode === 32) {
+        var aimCoords = aimImg.getBoundingClientRect();
+        var ghostLeft = ghost.getBoundingClientRect().left + 20;
+        var ghostRight = ghost.getBoundingClientRect().right - 20;
+        var ghostTop = ghost.getBoundingClientRect().top + 20;
+        var ghostBot = ghost.getBoundingClientRect().bottom - 20;
         var aimCenterY = aimCoords.y + aim.offsetHeight / 2;
         var aimCenterX = aimCoords.x + aim.offsetWidth / 2;
+        var animaStyle = 'transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;';
         aimImg.style.transform = '';
 
-        console.log(aimCenterX, '|', aimCenterY);
-    }
-    if (aimCenterX > ghostLeft && aimCenterX < ghostRight 
-        && aimCenterY > ghostTop && aimCenterY < ghostBot) {
-            fire.setAttribute('style','visibility: visible; transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;');
-            // ghost.setAttribute('style','transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;');
-            ghost.style.transitionDelay = imgOpacityDelay +'ms';
-            ghost.style.transitionDuration = imgOpacityDuration +'ms';
-            ghost.style.opacity = '0';
-            aimImg.style.display = 'none';
-            setTimeout(function() {
-                ghost.style.transitionDelay = '';
-                ghost.style.transitionDuration = '';
-                ghost.style.opacity = '';
-                ghost.style.display = 'none';
-                fire.removeAttribute('style');
-                aimImg.style.display = '';
-            }, delayToReset);
+        if (aimCenterX > ghostLeft
+            && aimCenterX < ghostRight 
+            && aimCenterY > ghostTop 
+            && aimCenterY < ghostBot
+            ) {
+                fire.style.cssText = 'visibility: visible;'+ animaStyle;
+                ghost.style.cssText += animaStyle;
+                aimImg.style.display = 'none';
+                setTimeout(function() {
+                    ghost.removeAttribute('style');
+                    fire.removeAttribute('style');
+                    aimImg.style.display = '';
+                }, delayToReset);
+        }
     }
 });
 
 function setRandomCoords() {
-    var x = Math.floor(Math.random() * (shooter.offsetWidth - ghost.offsetWidth));
-    var y = Math.floor(Math.random() * (shooter.offsetHeight - ghost.offsetHeight));
+    var x = Math.floor(Math.random() * (shooter.offsetWidth - ghost.offsetWidth) + 1);
+    var y = Math.floor(Math.random() * (shooter.offsetHeight - ghost.offsetHeight) + 1);
 
     ghost.style.left = x + 'px';
     ghost.style.top = y + 'px';
@@ -80,7 +77,5 @@ setInterval(function() {
         if(ghost.style.display === 'none') {
         ghost.style.display = ''; 
     }
-        if(!ghost.style.opacity) {
-            setRandomCoords();
-    }
+        setRandomCoords();
 }, 3000);
