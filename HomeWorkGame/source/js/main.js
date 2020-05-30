@@ -57,10 +57,11 @@ body.addEventListener('keyup', function(e) {
                 ghost.style.cssText += animaStyle;
                 aimImg.style.display = 'none';
                 setTimeout(function() {
-                    ghost.removeAttribute('style');
                     fire.removeAttribute('style');
+                    ghost.removeAttribute('style');
+                    ghost.style.display = 'none';
                     aimImg.style.display = '';
-                }, delayToReset);
+                   }, delayToReset);
         }
     }
 });
