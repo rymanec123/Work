@@ -57,8 +57,25 @@ console.log(corrSum(3));
 
 // 5) Реализуйте чейн. Вначале задаётся число, затем выполняются арифметические действия, в конце результат выводится в консоль
 // setNum(10).plus(7).minus(2).showNum() // 10 + 7 - 2
-
-
+function setNum(arg) {
+  let result = arg;
+  return {
+    plus(arg) {
+      result += arg;
+      
+      return this;
+    },
+    minus(arg) {
+      result -= arg;
+      
+      return this;
+    },
+    showNum() {
+      console.log(result); 
+    }
+  };
+} 
+setNum(10).plus(7).minus(2).showNum();
 // 6) Выполните деструктурирующее присваивание переменным полей объекта, полученного в пункте 2.
 
 
