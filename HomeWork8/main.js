@@ -77,22 +77,27 @@ function setNum(arg) {
 } 
 setNum(10).plus(7).minus(2).showNum();
 // 6) Выполните деструктурирующее присваивание переменным полей объекта, полученного в пункте 2.
+let obj = {
+  usa: ['New York', 'San Francisco'],
+  europe: ['Paris', 'Minsk']
+};
 
-
+let {usa: cityUsa, europe: cityEu} = obj;
+  console.log(cityUsa, cityEu);
 // 7) "Натравите" метод printInfo из obj на obj1.
-
-// const obj = {
-//   fistName: 'Yura',
-//   lastName: 'Alekseyev',
-//   job: 'web developer',
+const obj = {
+  fistName: 'Yura',
+  lastName: 'Alekseyev',
+  job: 'web developer',
   
-//   printInfo: function() {
-//     console.log(`${this.fistName} ${this.lastName} works as ${this.job}.`)
-//   }
-// };
+  printInfo: function() {
+    console.log(`${this.fistName} ${this.lastName} works as ${this.job}.`)
+  }
+};
 
-// const obj1 = {
-//   fistName: 'John',
-//   lastName: 'Kalligan',
-//   job: 'musician'
-// };
+const obj1 = {
+  fistName: 'John',
+  lastName: 'Kalligan',
+  job: 'musician'
+};
+obj.printInfo.bind(obj1)();
