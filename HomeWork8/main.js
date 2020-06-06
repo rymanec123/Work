@@ -1,19 +1,15 @@
 'use strict'
 // 1) Сделайте функцию, которая получает имя пользователя и выводит на экран 'Hello, Имя'. 
 //  Если имя не передано, функция должна выводить 'Hello, %username%'. 
-function aler(name) {
-    if(typeof name === 'undefined') {
-      name = '%username%';
-    }
+function aler(name = '%username%') {
     alert(`Hello, ${name}`);
-    
   }
   aler()
 
 // 2) Есть маcсив объектов с информацией о населённых пунктах
 // Задача на его основе сделать объект с двумя полями usа  и europe, где значением каждого поля станет массив строк,
 //  содержащий релевантные названия городов.
-const arr = [
+const arr1 = [
   {
     city: 'New York',
     country: 'USA'
@@ -31,27 +27,29 @@ const arr = [
     country: 'Belarus'
   }
 ];
-let obj = arr.reduce(function(acc, item) {
-  if(item.country === 'USA') {
-    acc.usa.push(item.city);
-  } else {
-    acc.europe.push(item.city);
-  }
+let obj = arr1.reduce(function(acc, item) {
+  item.country === 'USA' ? acc.usa.push(item.city) : acc.europe.push(item.city)
 
   return acc;
 }, {usa: [], europe: []});
+
+console.log(obj);
 // 3) Найдите минимальный элемент произвольного массива чисел используя Math и синтаксис es5. Найдите максимальный
 //  элемент того же массива, используя Math и синтаксис es6.
-let arr = [1, 2, 4, 100, 300, -10, -50, 0];
+const arr2 = [1, 2, 4, 100, 300, -10, -50, 0];
 
-let min = Math.min.apply(null, arr);
+const  min = Math.min.apply(null, arr2);
+
+console.log(min);
 //--------------------
-let max = Math.max(...arr);
+const  max = Math.max(...arr2);
+
+console.log(max);
 // 4) Напишите функцию, которая принимает два аргумента и возвращает их сумму, затем каррируйте эту функцию до одного аргумента.
 function sum(arg, arg2) {
   return arg + arg2
 };
-let corrSum = sum.bind(null, 2);
+const corrSum = sum.bind(null, 2);
 
 console.log(corrSum(3));
 // 5) Реализуйте чейн. Вначале задаётся число, затем выполняются арифметические действия, в конце результат выводится в консоль
@@ -59,13 +57,13 @@ console.log(corrSum(3));
 function setNum(arg) {
   let result = arg;
   return {
-    plus(arg) {
-      result += arg;
+    plus(arg2) {
+      result += arg2;
       
       return this;
     },
-    minus(arg) {
-      result -= arg;
+    minus(arg3) {
+      result -= arg3;
       
       return this;
     },
@@ -74,17 +72,13 @@ function setNum(arg) {
     }
   };
 } 
-setNum(10).plus(7).minus(2).showNum();
+console.log(setNum(10).plus(7).minus(2).showNum());
 // 6) Выполните деструктурирующее присваивание переменным полей объекта, полученного в пункте 2.
-let obj = {
-  usa: ['New York', 'San Francisco'],
-  europe: ['Paris', 'Minsk']
-};
-let {usa: cityUsa, europe: cityEu} = obj;
+const {usa: cityUsa, europe: cityEu} = obj;
 
 console.log(cityUsa, cityEu);
 // 7) "Натравите" метод printInfo из obj на obj1.
-const obj = {
+const obj2 = {
   fistName: 'Yura',
   lastName: 'Alekseyev',
   job: 'web developer',
@@ -99,4 +93,6 @@ const obj1 = {
   lastName: 'Kalligan',
   job: 'musician'
 };
-obj.printInfo.bind(obj1)();
+obj2.printInfo.call(obj1);
+
+console.log(obj1);
