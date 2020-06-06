@@ -8,7 +8,6 @@ function aler(name) {
     alert(`Hello, ${name}`);
     
   }
-  
   aler()
 
 // 2) Есть маcсив объектов с информацией о населённых пунктах
@@ -53,8 +52,8 @@ function sum(arg, arg2) {
   return arg + arg2
 };
 let corrSum = sum.bind(null, 2);
-console.log(corrSum(3));
 
+console.log(corrSum(3));
 // 5) Реализуйте чейн. Вначале задаётся число, затем выполняются арифметические действия, в конце результат выводится в консоль
 // setNum(10).plus(7).minus(2).showNum() // 10 + 7 - 2
 function setNum(arg) {
@@ -81,9 +80,9 @@ let obj = {
   usa: ['New York', 'San Francisco'],
   europe: ['Paris', 'Minsk']
 };
-
 let {usa: cityUsa, europe: cityEu} = obj;
-  console.log(cityUsa, cityEu);
+
+console.log(cityUsa, cityEu);
 // 7) "Натравите" метод printInfo из obj на obj1.
 const obj = {
   fistName: 'Yura',
