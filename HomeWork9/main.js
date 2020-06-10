@@ -26,15 +26,11 @@ function createListItem(text) {
 }
 request(function(x) {
   request2(function(y) {
-    const userCountryArr = x.map(function(item) {
-      const country = y.find(function(elem) {
-        return elem.userId === item.id;
-      })
-      newObjItem = {...item};
-      newObjItem.country =  country.country;
-      
-      return newObjItem;
-    });
+    const userCountryArr = x.map(item => {
+    const {country} = y.find(elem => elem.userId === item.id);
+
+    return {...item, country}
+  });
     function outeList(i, arg) {
       const ul = createList();
       const li = createListItem(`First Name: ${arg[i].fistName} 
@@ -44,11 +40,9 @@ request(function(x) {
       ul.appendChild(li);
       document.body.appendChild(ul);
      }
-     outeList(0, userCountryArr);
-     outeList(1, userCountryArr);
-     outeList(2, userCountryArr);
-     outeList(3, userCountryArr);
-     outeList(4, userCountryArr);
+     for(let i = 0; i < userCountryArr.length; i++) {
+      outeList(i, userCountryArr);
+    }
   });
 });
 
@@ -65,6 +59,7 @@ request(function(x) {
 //     }, []);
 //   });
 // });
+
 
   
   
