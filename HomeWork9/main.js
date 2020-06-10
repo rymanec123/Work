@@ -26,13 +26,14 @@ function createListItem(text) {
 }
 request(function(x) {
   request2(function(y) {
-    let userCountryArr = x.map(function(item) {
-      y.find(function(elem) {
-        if(elem.userId === item.id) {
-        item.country = elem.country
-        }
+    const userCountryArr = x.map(function(item) {
+      const country = y.find(function(elem) {
+        return elem.userId === item.id;
       })
-      return item; 
+      newObjItem = {...item};
+      newObjItem.country =  country.country;
+      
+      return newObjItem;
     });
     function outeList(i, arg) {
       const ul = createList();
