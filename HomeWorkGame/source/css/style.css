@@ -12,6 +12,7 @@ body {
     margin: auto;
     position: relative;
     cursor: pointer;
+    overflow: hidden;
 }
 .b-shooter__aim {
     height: 90px;
@@ -22,11 +23,11 @@ body {
     pointer-events: none;
     transform: translate(300px, 200px);
     transition: transform .1s linear;
-    z-index: 2;
+    z-index: 3;
    }
 .b-shooter__img-fire {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     top: -50px;
     transition-property: opacity;
@@ -40,4 +41,61 @@ body {
     pointer-events: none;
     transition-property: opacity;
     transition-timing-function: ease-in;
+    animation: ghost-movements 2s infinite ease-in-out;
+    z-index: 1;
+}
+.b-shooter__progress {
+    border-radius: 30px;
+    width: 50px;
+    height: 85%;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 5px;
+    justify-content: space-evenly;
+    pointer-events: none;
+}
+.b-shooter__progress > img {
+    filter: Alpha(opacity=100);  
+}
+.b-shooter__health {
+    height: 50px;
+    width: 180px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    pointer-events: none;
+}
+.b-shooter__health > svg {
+    width: 35px;
+    fill: #df4032;
+}
+@keyframes ghost-movements {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+    10% {
+        transform: scale(1.1, .9) translateY(0);
+    }
+    30% {
+        transform: scale(.9, 1.1) translateY(-50px);
+    }
+    50% {
+        transform: scale(1.05, .95) translateY(50px);
+    }
+    80% {
+        transform: scale(.9, 1.1) translateY(-30px);
+    }
+    100% {
+        transform: scale(1) translateY(0);
+    }
 }

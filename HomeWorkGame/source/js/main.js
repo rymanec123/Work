@@ -26,7 +26,9 @@ shooter.addEventListener('click', function(e) {
     else if(y > limitY) {
         y = limitY;
     }
+    if(!ghost.style.animationPlayState) {
     aim.style.transform ='translate(' + x + 'px , ' + y + 'px)';
+    }
   });
 
 body.addEventListener('keydown', function(e) {
@@ -54,7 +56,7 @@ body.addEventListener('keyup', function(e) {
             && aimCenterY < ghostBot
             ) {
                 fire.style.cssText = 'visibility: visible;'+ animaStyle;
-                ghost.style.cssText += animaStyle;
+                ghost.style.cssText += animaStyle +'animation-play-state: paused;';
                 aimImg.style.display = 'none';
                 setTimeout(function() {
                     fire.removeAttribute('style');
@@ -78,5 +80,7 @@ setInterval(function() {
         if(ghost.style.display === 'none') {
         ghost.style.display = ''; 
     }
+    if(!ghost.style.animationPlayState) {
         setRandomCoords();
+    }
 }, 3000);
