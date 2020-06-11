@@ -20,7 +20,7 @@ function createList() {
   return document.createElement('ul');
 }
 function createListItem(text) {
-  
+
   const li = document.createElement('li');
   li.innerText = text;
   
@@ -31,10 +31,12 @@ request(function(x) {
   request2(function(y) {
 
     const userCountryArr = x.map(item => {
+
     const {country} = y.find(elem => elem.userId === item.id);
 
     return {...item, country}
-  });
+    });
+    
     const ul = createList();
     document.body.appendChild(ul);
 
@@ -45,7 +47,7 @@ request(function(x) {
                                  Country: ${arg[i].country}`);
        
       ul.appendChild(li);
-      }
+    }
      for(let i = 0; i < userCountryArr.length; i++) {
       outeList(i, userCountryArr);
     }
