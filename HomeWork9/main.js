@@ -16,30 +16,36 @@ import {request, request2} from './arr&STime.js';
 
 // Разбейте получившийся js-код на два модуля.
 function createList() {
+
   return document.createElement('ul');
 }
 function createListItem(text) {
+  
   const li = document.createElement('li');
   li.innerText = text;
   
   return li;
 }
+
 request(function(x) {
   request2(function(y) {
+
     const userCountryArr = x.map(item => {
     const {country} = y.find(elem => elem.userId === item.id);
 
     return {...item, country}
   });
+    const ul = createList();
+    document.body.appendChild(ul);
+
     function outeList(i, arg) {
-      const ul = createList();
+
       const li = createListItem(`First Name: ${arg[i].fistName} 
                                  Last Name: ${arg[i].lastName} 
                                  Country: ${arg[i].country}`);
        
       ul.appendChild(li);
-      document.body.appendChild(ul);
-     }
+      }
      for(let i = 0; i < userCountryArr.length; i++) {
       outeList(i, userCountryArr);
     }

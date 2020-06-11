@@ -1,6 +1,7 @@
 'use strict'
 export {request, request2};
 function request(cb) {
+
     const users = [
       {
         id: 1,
@@ -32,7 +33,9 @@ function request(cb) {
       cb(users);
     }, 1000);
   }
+
 function request2(cb2) {
+
     const countries = [
       {
         userId: 44,
@@ -55,7 +58,9 @@ function request2(cb2) {
         country: 'Ireland'
       }
     ];
+
     setTimeout(function() {
+      
       cb2(countries);
     }, 1000);
   }
