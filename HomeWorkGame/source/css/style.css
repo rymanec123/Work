@@ -46,8 +46,8 @@ body {
 }
 .b-shooter__progress {
     border-radius: 30px;
-    width: 50px;
-    height: 85%;
+    width: 32px;
+    height: 402px;
     background: rgba(0, 0, 0, 0.5);
     position: absolute;
     margin: auto;
@@ -56,12 +56,9 @@ body {
     left: 5px;
     display: flex;
     flex-wrap: wrap;
-    padding: 15px 5px;
-    justify-content: space-evenly;
+    padding: 9px 5px;
+    justify-content: space-between;
     pointer-events: none;
-}
-.b-shooter__progress > img {
-    filter: Alpha(opacity=100);  
 }
 .b-shooter__health {
     height: 50px;

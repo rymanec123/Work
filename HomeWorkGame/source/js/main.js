@@ -14,20 +14,21 @@ shooter.addEventListener('click', function(e) {
     var limitX = shooter.offsetWidth - aim.offsetWidth;
     var limitY = shooter.offsetHeight - aim.offsetHeight;
 
-    if(x < 0) {
-        x = 0;
-    }
-    else if(x > limitX) {
-        x = limitX;
-    }
-    if(y < 0) {
-        y = 0;
-    }
-    else if(y > limitY) {
-        y = limitY;
-    }
     if(!ghost.style.animationPlayState) {
-    aim.style.transform ='translate(' + x + 'px , ' + y + 'px)';
+        if(x < 0) {
+            x = 0;
+        }
+        else if(x > limitX) {
+            x = limitX;
+        }
+        if(y < 0) {
+            y = 0;
+        }
+        else if(y > limitY) {
+            y = limitY;
+        }
+        
+        aim.style.transform ='translate(' + x + 'px , ' + y + 'px)';
     }
   });
 
@@ -38,33 +39,28 @@ body.addEventListener('keydown', function(e) {
     }
 });
 
-body.addEventListener('keyup', function(e) {
-    if(e.keyCode === 32) {
-        var aimCoords = aimImg.getBoundingClientRect();
-        var ghostLeft = ghost.getBoundingClientRect().left + 20;
-        var ghostRight = ghost.getBoundingClientRect().right - 20;
-        var ghostTop = ghost.getBoundingClientRect().top + 20;
-        var ghostBot = ghost.getBoundingClientRect().bottom - 20;
-        var aimCenterY = aimCoords.y + aim.offsetHeight / 2;
-        var aimCenterX = aimCoords.x + aim.offsetWidth / 2;
-        var animaStyle = 'transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;';
-        aimImg.style.transform = '';
+body.addEventListener('keyup', function(keyCode = 32) {
+    var aimCoords = aimImg.getBoundingClientRect();
+    var  ghostCoords = ghost.getBoundingClientRect();
+    var aimCenterY = aimCoords.y + aim.offsetHeight / 2;
+    var aimCenterX = aimCoords.x + aim.offsetWidth / 2;
+    var animaStyle = 'transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;';
+    aimImg.style.transform = '';
 
-        if (aimCenterX > ghostLeft
-            && aimCenterX < ghostRight 
-            && aimCenterY > ghostTop 
-            && aimCenterY < ghostBot
-            ) {
-                fire.style.cssText = 'visibility: visible;'+ animaStyle;
-                ghost.style.cssText += animaStyle +'animation-play-state: paused;';
-                aimImg.style.display = 'none';
-                setTimeout(function() {
-                    fire.removeAttribute('style');
-                    ghost.removeAttribute('style');
-                    ghost.style.display = 'none';
-                    aimImg.style.display = '';
-                   }, delayToReset);
-        }
+    if (aimCenterX > ghostCoords.left + 20
+        && aimCenterX < ghostCoords.right - 20
+        && aimCenterY > ghostCoords.top + 20
+        && aimCenterY < ghostCoords.bottom - 20
+        ) {
+            fire.style.cssText = 'visibility: visible;'+ animaStyle;
+            ghost.style.cssText += animaStyle +'animation-play-state: paused;';
+            aimImg.style.display = 'none';
+            setTimeout(function() {
+                fire.removeAttribute('style');
+                ghost.removeAttribute('style');
+                ghost.style.display = 'none';
+                aimImg.style.display = '';
+                }, delayToReset);
     }
 });
 
