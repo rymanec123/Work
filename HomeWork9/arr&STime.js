@@ -1,8 +1,7 @@
 'use strict'
-export {request, request2};
-function request(cb) {
-
-    const users = [
+export {requestForUsers, requestForCountries};
+function requestForUsers(cb) {
+  const users = [
       {
         id: 1,
         fistName: 'Chloe',
@@ -34,9 +33,8 @@ function request(cb) {
     }, 1000);
   }
 
-function request2(cb2) {
-
-    const countries = [
+function requestForCountries(cb2) {
+  const countries = [
       {
         userId: 44,
         country: 'Germany'
@@ -60,7 +58,6 @@ function request2(cb2) {
     ];
 
     setTimeout(function() {
-      
       cb2(countries);
     }, 1000);
   }

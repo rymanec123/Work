@@ -1,5 +1,5 @@
 'use strict'
-import {request, request2} from './arr&STime.js';
+import {requestForUsers, requestForCountries} from './arr&STime.js';
 // Есть два массива: в первом содержится информация об имени пользователя, во втором - о стране.
 //  Сделайте два setTimeout, которые предоставляют эти массивы. Получите сначала массив users, затем массив countries.
 //   Когда оба массива получены, сопоставьте страну с пользователям с помощью id и создайте новый массив,
@@ -19,19 +19,10 @@ function createList() {
 
   return document.createElement('ul');
 }
-function createListItem(text) {
 
-  const li = document.createElement('li');
-  li.innerText = text;
-  
-  return li;
-}
-
-request(function(x) {
-  request2(function(y) {
-
+requestForUsers(function(x) {
+  requestForCountries(function(y) {
     const userCountryArr = x.map(item => {
-
     const {country} = y.find(elem => elem.userId === item.id);
 
     return {...item, country}
@@ -39,25 +30,24 @@ request(function(x) {
           
     const ul = createList();
    
-    for(let i = 0; i < userCountryArr.length; i++) {
-      
-      function createListItem(text) {
+    function createListItem({fistName, lastName, country}) {
+      const li = document.createElement('li');
 
-        const {fistName, lastName, country} =  userCountryArr[i];
+      li.innerText = `First Name: ${fistName} 
+                       Last Name: ${lastName} 
+                       Country: ${country}`;
 
-        const li = document.createElement('li');
-            li.innerText = `First Name: ${fistName} 
-                               Last Name: ${lastName} 
-                               Country: ${country}`;
-
-          return li;
-      }
-
-       const li = createListItem(userCountryArr[i]);
-      ul.appendChild(li); 
-      document.body.appendChild(ul);
+        return li;
     }
-});
+ 
+    for(let i = 0; i < userCountryArr.length; i++) {
+      const li = createListItem(userCountryArr[i]);
+      
+      ul.appendChild(li); 
+    }
+
+  document.body.appendChild(ul);
+  });
 });
 
 
