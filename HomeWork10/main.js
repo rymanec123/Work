@@ -35,27 +35,16 @@ function arrUnion() {
         const arrUsers = [...arrMale, ...arrFemale];
         const ul = createList();
    
-        function createListItem(firstName, lastName, picture) {
+        function createListItem({name, picture}) {
             const li = document.createElement('li');
-            const img = document.createElement('img');
-            const div = document.createElement('div');
-            const divText = document.createElement('div');
 
-            divText.innerText = `${firstName} ${lastName}`;
-
-            img.setAttribute('src', picture);
-            div.setAttribute('class', 'div_img');
-            divText.setAttribute('class', 'div_name');
-
-            div.appendChild(img)
-            li.appendChild(div);
-            li.appendChild(divText)
+            li.innerHTML = `<img src="${picture.large}" alt="user"  /> ${name.first} ${name.last}`;
 
             return li;
         }
      
         for(let i = 0; i < arrUsers.length; i++) {
-          const li = createListItem(arrUsers[i].name.first, arrUsers[i].name.last, arrUsers[i].picture.large);
+          const li = createListItem(arrUsers[i]);
 
           ul.appendChild(li); 
         }
@@ -65,11 +54,13 @@ function arrUnion() {
 
 requestForUsers(function(male) {
     arrMale = male.results;
+
     arrUnion();
 }, errorHandler, '&gender=male');
 
 requestForUsers(function(female) {
     arrFemale = female.results;
+
     arrUnion();
 }, errorHandler, '&gender=female');
 
