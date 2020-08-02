@@ -72,9 +72,106 @@ body {
     justify-content: space-evenly;
     pointer-events: none;
 }
-.b-shooter__health > svg {
+.b-shooter__health-icon {
     width: 35px;
     fill: #df4032;
+}
+.b-shooter__progress-icon {
+	transition: opacity 0.2s ease-out, transform .2s ease-out;
+
+}
+.b-shooter__progress-icon._hitTheGhost {
+	opacity: 0.2;
+	transform: rotate(180deg);
+}
+._healthLost {
+	transform: scale(.85);
+	fill: rgba(90, 87, 98, 0.7);
+}
+._flashingHealthBar {
+	animation: blink 2s ease-in-out infinite;
+}
+.b-shooter__game-over{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding-top: 250px;
+	pointer-events: none;
+	opacity: 0;
+}
+.b-shooter__game-over-title {
+	font-size: 70px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+}
+.b-shooter__game-over-sub-title {
+	font-size: 24px;
+}
+._win .b-shooter__game-over,
+._lose .b-shooter__game-over {
+	opacity: 0.8;
+	pointer-events: all;
+	transition: opacity .3s ease-in-out;
+}
+._win .b-shooter__game-over {
+	background-color: #fff;
+	color: #000;
+}
+._lose .b-shooter__game-over {
+	background-color: #000;
+	color: #fff;
+}
+
+._lose .b-shooter__img-ghost {
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	z-index: 0;
+	animation: ghost-scale 7s .1s cubic-bezier(0, 0.53, 0.2, 0.96) forwards;
+	opacity: 0.9;
+}
+.b-shooter__game-over h2 {
+	font-size: 80px;
+	letter-spacing: 10px;
+	margin-bottom: 15px;
+}
+.b-shooter__game-over p {
+	margin-top: 10px;
+	font-size: 30px;
+	margin-left: 45px;
+	margin-right: 45px;
+}
+._win .b-shooter__progress,
+._lose .b-shooter__progress,
+._win .b-shooter__health,
+._lose .b-shooter__health,
+._lose .b-shooter__aim {
+	visibility: hidden;
+}
+
+@keyframes ghost-scale {
+	to {
+		transform: scale(17);
+	}
+}
+@keyframes blink {
+	0%, 100% {
+		opacity: 1;
+	}
+
+	10%, 30%, 50%, 70%, 90% {
+		opacity: .7;
+	}
+
+	20%, 40%, 60%, 80% {
+		opacity: .5;
+	}
 }
 @keyframes ghost-movements {
     0% {

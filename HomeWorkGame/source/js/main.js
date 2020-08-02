@@ -3,15 +3,23 @@ var aimImg = document.querySelector('.b-shooter__img-aim');
 var ghost = document.querySelector('.b-shooter__img-ghost');
 var shooter = document.querySelector('.b-shooter');
 var fire = document.querySelector('.b-shooter__img-fire');
+var progressBar = document.querySelector('.b-shooter__progress')
+var progressIcon = document.getElementsByClassName('b-shooter__progress-icon');
+var healthIcon = document.getElementsByClassName('b-shooter__health-icon');
+var healthBar = document.querySelector('.b-shooter__health');
+var health = document.getElementsByClassName('b-shooter__health-icon');
+var shooterGameOver = document.querySelector('.b-shooter__game-over');
+var shooterGameOverTitle = document.querySelector('.b-shooter__game-over-title');
 var body = document.body;
 var delayToReset = 500;
 var imgOpacityDelay = delayToReset * 0.4;
 var imgOpacityDuration = delayToReset - imgOpacityDelay;
+var isGameOver = false;
 
 shooter.addEventListener('click', function(e) {
-    if(ghost.style.animationPlayState) {
+    if(ghost.style.animationPlayState || isGameOver) {
         return;
-       }
+    }
 
     var x = e.offsetX - aim.offsetWidth / 2;
     var y = e.offsetY - aim.offsetHeight / 2;
@@ -43,7 +51,11 @@ body.addEventListener('keydown', function(e) {
 });
 
 body.addEventListener('keyup', function(e) {
-    if(e.keyCode !== 32) {
+    if (e.keyCode === 13 && isGameOver) {
+        reset();
+    }
+
+    if(e.keyCode !== 32 || isGameOver) {
         return
     }
 
@@ -64,11 +76,17 @@ body.addEventListener('keyup', function(e) {
             aimImg.style.display = 'none';
 
             setTimeout(function() {
-                fire.removeAttribute('style');
-                ghost.removeAttribute('style');
-                ghost.style.display = 'none';
-                aimImg.style.display = '';
-                }, delayToReset);
+                if(isGameOver) {
+                    dropTheCurtain(true);
+                } else {
+                    fire.removeAttribute('style');
+                    ghost.removeAttribute('style');
+                    ghost.style.display = 'none';
+                    aimImg.style.display = '';
+                }
+            }, delayToReset);
+
+            markProgress();
     }
 });
 
@@ -81,10 +99,95 @@ function setRandomCoords() {
 };
 
 setInterval(function() {
+    if (ghost.style.animationPlayState ==='paused') {
+
+        return
+    } 
+    
     if(ghost.style.display === 'none') {
         ghost.style.display = ''; 
-    }
-    if(!ghost.style.animationPlayState) {
         setRandomCoords();
+
+    } else {
+        setRandomCoords();
+        markLifeStatus();
     }
 }, 3000);
+
+markProgress = () => {
+    for (let i = 0; i < progressIcon.length; i++) {
+        if (!progressIcon[i].classList.contains('_hitTheGhost')) {
+            progressIcon[i].classList.add('_hitTheGhost');
+
+            if (i === progressIcon.length-1) {
+                isGameOver = true;
+            };
+
+        break;
+        }
+    }
+};
+
+function dropTheCurtain (isWin) {
+    if(isWin) {
+        shooter.classList.add('_win');
+        shooterGameOverTitle.innerText = 'You Win';
+        healthBar.style.display = 'none';
+        progressBar.style.display = 'none';
+      
+    }  else {
+        shooter.classList.add('_lose');
+        shooterGameOverTitle.innerText = 'You Lose';
+        ghost.removeAttribute('style');
+        healthBar.style.display = 'none';
+        progressBar.style.display = 'none';
+        aimImg.style.display = 'none';
+    }
+}
+
+markLifeStatus = () => {
+    if (healthBar.classList.contains('_flashingHealthBar')) {
+        isGameOver = true;
+        dropTheCurtain(false)
+
+        return;
+    }
+  
+    for (let i = 0; i < health.length; i++) {
+        if (!health[i].classList.contains('_healthLost')) {
+            health[i].classList.add('_healthLost');
+  
+            if (i === health.length - 1) {
+                healthBar.classList.add('_flashingHealthBar');
+            }
+  
+        break;
+        }
+    }
+}
+
+function reset() {
+    isGameOver = false;
+    healthBar.classList.remove('_flashingHealthBar');
+    shooter.classList.remove('_win');
+    shooter.classList.remove('_lose');
+    ghost.removeAttribute('style');
+    ghost.style.display = ('none');
+    fire.removeAttribute('style');
+    aimImg.removeAttribute('style');
+    healthBar.style.display = '';
+    progressBar.style.display = '';
+    aimImg.style.display = '';
+  
+    for (let i = 0; i < progressIcon.length; i++) {
+      if (progressIcon[i].classList.contains('_hitTheGhost')) {
+          progressIcon[i].classList.remove('_hitTheGhost');
+      };
+    };
+  
+    for (let i = 0; i < health.length; i++) {
+        if (health[i].classList.contains('_healthLost')) {
+            health[i].classList.remove('_healthLost');
+        };
+    };
+  }
