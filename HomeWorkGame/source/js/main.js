@@ -1,45 +1,47 @@
-var aim = document.querySelector('.b-shooter__aim');
-var aimImg = document.querySelector('.b-shooter__img-aim');
-var ghost = document.querySelector('.b-shooter__img-ghost');
-var shooter = document.querySelector('.b-shooter');
-var fire = document.querySelector('.b-shooter__img-fire');
-var progressBar = document.querySelector('.b-shooter__progress')
-var progressIcon = document.getElementsByClassName('b-shooter__progress-icon');
-var healthIcon = document.getElementsByClassName('b-shooter__health-icon');
-var healthBar = document.querySelector('.b-shooter__health');
-var health = document.getElementsByClassName('b-shooter__health-icon');
-var shooterGameOver = document.querySelector('.b-shooter__game-over');
-var shooterGameOverTitle = document.querySelector('.b-shooter__game-over-title');
-var body = document.body;
-var delayToReset = 500;
-var imgOpacityDelay = delayToReset * 0.4;
-var imgOpacityDuration = delayToReset - imgOpacityDelay;
-var isGameOver = false;
+'use strict';
+
+const aim = document.querySelector('.b-shooter__aim');
+const aimImg = document.querySelector('.b-shooter__img-aim');
+const ghost = document.querySelector('.b-shooter__img-ghost');
+const shooter = document.querySelector('.b-shooter');
+const fire = document.querySelector('.b-shooter__img-fire');
+const progressBar = document.querySelector('.b-shooter__progress')
+const progressIcon = document.getElementsByClassName('b-shooter__progress-icon');
+const healthIcon = document.getElementsByClassName('b-shooter__health-icon');
+const healthBar = document.querySelector('.b-shooter__health');
+const health = document.getElementsByClassName('b-shooter__health-icon');
+const shooterGameOver = document.querySelector('.b-shooter__game-over');
+const shooterGameOverTitle = document.querySelector('.b-shooter__game-over-title');
+const body = document.body;
+const delayToReset = 500;
+const imgOpacityDelay = delayToReset * 0.4;
+let imgOpacityDuration = delayToReset - imgOpacityDelay;
+let isGameOver = false;
 
 shooter.addEventListener('click', function(e) {
     if(ghost.style.animationPlayState || isGameOver) {
         return;
     }
 
-    var x = e.offsetX - aim.offsetWidth / 2;
-    var y = e.offsetY - aim.offsetHeight / 2;
-    var limitX = shooter.offsetWidth - aim.offsetWidth;
-    var limitY = shooter.offsetHeight - aim.offsetHeight;
+    const x1 = e.offsetX - aim.offsetWidth / 2;
+    const y1 = e.offsetY - aim.offsetHeight / 2;
+    const limitX = shooter.offsetWidth - aim.offsetWidth;
+    const limitY = shooter.offsetHeight - aim.offsetHeight;
 
-        if(x < 0) {
-            x = 0;
+        if(x1 < 0) {
+            x1 = 0;
         }
-        else if(x > limitX) {
-            x = limitX;
+        else if(x1 > limitX) {
+            x1 = limitX;
         }
-        if(y < 0) {
-            y = 0;
+        if(y1 < 0) {
+            y1 = 0;
         }
-        else if(y > limitY) {
-            y = limitY;
+        else if(y1 > limitY) {
+            y1 = limitY;
         }
         
-        aim.style.transform ='translate(' + x + 'px , ' + y + 'px)';
+        aim.style.transform ='translate(' + x1 + 'px , ' + y1 + 'px)';
   });
 
 body.addEventListener('keydown', function(e) {
@@ -59,11 +61,11 @@ body.addEventListener('keyup', function(e) {
         return
     }
 
-    var aimCoords = aimImg.getBoundingClientRect();
-    var  ghostCoords = ghost.getBoundingClientRect();
-    var aimCenterY = aimCoords.y + aim.offsetHeight / 2;
-    var aimCenterX = aimCoords.x + aim.offsetWidth / 2;
-    var animaStyle = 'transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;';
+    const aimCoords = aimImg.getBoundingClientRect();
+    const  ghostCoords = ghost.getBoundingClientRect();
+    const aimCenterY = aimCoords.y + aim.offsetHeight / 2;
+    const aimCenterX = aimCoords.x + aim.offsetWidth / 2;
+    let animaStyle = 'transition-delay:'+ imgOpacityDelay +'ms; transition-duration:'+ imgOpacityDuration +'ms; opacity:0;';
     aimImg.style.transform = '';
 
     if (aimCenterX > ghostCoords.left + 20
@@ -91,8 +93,8 @@ body.addEventListener('keyup', function(e) {
 });
 
 function setRandomCoords() {
-    var x = Math.floor(Math.random() * (shooter.offsetWidth - ghost.offsetWidth) + 1);
-    var y = Math.floor(Math.random() * (shooter.offsetHeight - ghost.offsetHeight) + 1);
+    let x = Math.floor(Math.random() * (shooter.offsetWidth - ghost.offsetWidth) + 1);
+    let y = Math.floor(Math.random() * (shooter.offsetHeight - ghost.offsetHeight) + 1);
 
     ghost.style.left = x + 'px';
     ghost.style.top = y + 'px';
@@ -114,7 +116,7 @@ setInterval(function() {
     }
 }, 3000);
 
-markProgress = () => {
+const markProgress = () => {
     for (let i = 0; i < progressIcon.length; i++) {
         if (!progressIcon[i].classList.contains('_hitTheGhost')) {
             progressIcon[i].classList.add('_hitTheGhost');
@@ -128,24 +130,8 @@ markProgress = () => {
     }
 };
 
-function dropTheCurtain (isWin) {
-    if(isWin) {
-        shooter.classList.add('_win');
-        shooterGameOverTitle.innerText = 'You Win';
-        healthBar.style.display = 'none';
-        progressBar.style.display = 'none';
-      
-    }  else {
-        shooter.classList.add('_lose');
-        shooterGameOverTitle.innerText = 'You Lose';
-        ghost.removeAttribute('style');
-        healthBar.style.display = 'none';
-        progressBar.style.display = 'none';
-        aimImg.style.display = 'none';
-    }
-}
 
-markLifeStatus = () => {
+const markLifeStatus = () => {
     if (healthBar.classList.contains('_flashingHealthBar')) {
         isGameOver = true;
         dropTheCurtain(false)
@@ -163,6 +149,23 @@ markLifeStatus = () => {
   
         break;
         }
+    }
+}
+
+function dropTheCurtain (isWin) {
+    if(isWin) {
+        shooter.classList.add('_win');
+        shooterGameOverTitle.innerText = 'You Win';
+        healthBar.style.display = 'none';
+        progressBar.style.display = 'none';
+      
+    }  else {
+        shooter.classList.add('_lose');
+        shooterGameOverTitle.innerText = 'You Lose';
+        ghost.removeAttribute('style');
+        healthBar.style.display = 'none';
+        progressBar.style.display = 'none';
+        aimImg.style.display = 'none';
     }
 }
 
